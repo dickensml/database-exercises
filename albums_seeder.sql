@@ -1,8 +1,8 @@
 USE codeup_test_db;
 
-DROP TABLE IF EXISTS 30_plus_albums;
+DROP TABLE IF EXISTS albums;
 
-CREATE TABLE 30_plus_albums(
+CREATE TABLE albums(
                        id           INT UNSIGNED NOT NULL AUTO_INCREMENT,
                        artist       VARCHAR(200) DEFAULT 'No artist, yet',
                        name         VARCHAR(200) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE 30_plus_albums(
                        PRIMARY KEY (id)
 );
 
-INSERT INTO 30_plus_albums (artist, name, release_date, genre, sales)
+INSERT INTO albums (artist, name, release_date, genre, sales)
 VALUES ('Michael Jackson','Thriller',1982,'Pop/Rock/R&B',47.3),
        ('AC/DC','Back in Black',1980,'Hard rock',26.1),
        ('Pink Floyd','The Dark Side of the Moon',1973,'Progressive rock',24.2),
