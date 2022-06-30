@@ -1,6 +1,6 @@
 USE codeup_test_db;
 
-TRUNCATE TABLE books;
+TRUNCATE TABLE albums;
 
 # DROP TABLE IF EXISTS albums;
 
