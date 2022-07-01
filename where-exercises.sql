@@ -10,9 +10,10 @@ SELECT * FROM employees WHERE
         OR first_name =  'Maya');
 
 SELECT * FROM employees WHERE last_name lIKE 'E%';
+
 SELECT * FROM employees WHERE last_name lIKE 'E%'
-        OR last_name lIKE '%e'    ;
+        OR last_name lIKE '%e';
 SELECT * FROM employees WHERE last_name lIKE 'E%e';
 
 SELECT * FROM employees WHERE last_name lIKE '%q%'
-        AND != 'qu';
+        AND NOT last_name LIKE '%qu%';
