@@ -1,39 +1,43 @@
 USE employees;
 
-SELECT first_name, last_name, birth_date
+# 1.  find EE 101010 hire_date; use to find all EE with same hire_date
+
+
+SELECT first_name, last_name, hire_date
 FROM employees
-WHERE emp_no IN
-      (SELECT emp_no
-        FROM dept_manager
-)
-LIMIT 10;
+WHERE emp_no = '101010';
+
+SELECT first_name, last_name, hire_date
+FROM employees
+WHERE hire_date IN
+        (SELECT hire_date FROM employees
+         WHERE emp_no = '101010');
+# 2.----------------------------------------------
 
 
-SELECT emp_no
-FROM dept_manager dm
-WHERE dept_no IN (
-    SELECT dept_no
-    FROM departments
-    WHERE dept_name = 'Sales'
-    AND to_date > NOW()
-    );
+
+SELECT  e.emp_no, t.title
+FROM employees AS e
+    JOIN titles AS t ON t.emp_no = e.emp_no
+WHERE e.first_name = 'Aamod';
 
 
-# male vs female salary comparison; year over year comparison
 
-SELECT  female_salary, male_salary, year, (male_salary-female_salary) as difference from (
-              SELECT e.gender,
-                       avg(salary)                                     as female_salary,
-                       year(s.from_date)                               as year,
+# 3.------------------------------------------------
 
-                       (SELECT avg(salary)
-                        from employees e2
-                                 JOIN salaries s2 ON e2.emp_no = s2.emp_no
-                        WHERE gender = 'M'
-                          AND year(s2.from_date) = year(s2.from_date)) as male_salary
 
-                FROM employees e
-                         JOIN salaries s ON e.emp_no = s.emp_no
-                WHERE gender = 'F'
-                GROUP BY gender, year, male_salary
-        ) as tempTable;
+
+SELECT e.first_name, last_name
+FROM employees AS e
+    JOIN dept_manager AS dm ON dm.emp_no = e.emp_no
+WHERE e.gender = 'F' AND dm.to_date > NOW();
+
+
+# Bonus----------------
+SELECT d.dept_name
+FROM employees AS e
+JOIN dept_manager AS dm ON dm.emp_no = e.emp_no
+JOIN departments AS d ON d.dept_no = dm.dept_no
+WHERE e.gender = 'F' AND dm.to_date > NOW();
+
+
